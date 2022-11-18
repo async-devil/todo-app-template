@@ -1,0 +1,71 @@
+@startuml architecture
+
+skinparam componentStyle rectangle
+
+actor "User"
+
+component "Frontend" #d9ead3 {
+  port "Browser" as WEB
+  port "HTTP" as HTTP_F
+
+  component "View" as FV #b6d7a8
+
+  component "Controller" as FC #a4c2f4
+
+  component "Model" as FM #dd7e6b
+}
+
+component "Backend" #f1c232 {
+  port "HTTP" as HTTP_B
+  port "TCP" as TCP_B
+
+  component "Presentation layer" #b6d7a8 {
+    component "Application controller" as AC
+  }
+  
+  component "Application layer" #a4c2f4 {
+    component "Application service" as AS
+  }
+
+  component "Persistence layer" #dd7e6b {
+    component "Application repository" as AR
+  }
+}
+
+component "Data layer" #cc4125 {
+  port "TCP" as TCP_D
+
+  database "Database" as DB
+}
+
+User -> WEB : 1 Uses
+WEB -> FC: 2
+
+FC -> FM : 3 Manipulates
+FM -> HTTP_F : 4 Calls API
+HTTP_F -> FM : 15
+FM -down-> FC : 16 Passes data
+
+FC -> FV : 17 Updates
+FV -> WEB : 18
+WEB -> User : 19 Sees
+
+
+HTTP_F <-> HTTP_B : REST API
+
+
+HTTP_B -> AC : 5 Handles request
+AC -> AS : 6 Calls
+AS -> AR : 7 Uses
+
+AR -> TCP_B : 8 Requests
+TCP_B <-> TCP_D : Database connection
+TCP_D -> DB : 9 Persists
+DB -> TCP_D : 10 Returns
+TCP_B -> AR : 11
+
+AR -down-> AS : 12 Passes data
+AS -up-> AC : 13
+AC -> HTTP_B : 14 Replies
+
+@enduml

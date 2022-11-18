@@ -1,0 +1,20 @@
+@startuml architecture-simple
+
+skinparam componentStyle rectangle
+
+actor "User"
+
+component "Frontend" #b6d7a8
+
+component "Backend" #a4c2f4
+
+database "Database" #dd7e6b
+
+User -> Frontend : 1 Uses
+Frontend -> Backend : 2 Calls API
+Backend -> Database : 3 Manipulates data
+Database -> Backend : 4 Gives response
+Backend -> Frontend : 5 Updates
+Frontend -> User : 6 Sees
+
+@enduml
