@@ -8,8 +8,8 @@ The goal is to use the best architecture practices, even on small projects like 
 
 ### Simple one
 
-![architecture-simple](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/async-devil/todo-app-template/master/docs/architecture-simple.puml)
+![architecture-simple](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/async-devil/todo-list-app-template/master/docs/architecture-simple.puml)
 
 ### Accurate one
 
-![architecture](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/async-devil/todo-app-template/master/docs/architecture.puml)
+![architecture](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/async-devil/todo-list-app-template/master/docs/architecture.puml)
