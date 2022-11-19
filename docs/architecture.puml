@@ -4,7 +4,7 @@ skinparam componentStyle rectangle
 
 actor "User"
 
-component "Frontend" #d9ead3 {
+component "Frontend" %lighten("#b6d7a8", 20) {
   port "Browser" as WEB
   port "HTTP" as HTTP_F
 
@@ -15,7 +15,7 @@ component "Frontend" #d9ead3 {
   component "Model" as FM #dd7e6b
 }
 
-component "Backend" #f1c232 {
+component "Backend" %lighten("#a4c2f4", 20) {
   port "HTTP" as HTTP_B
   port "TCP" as TCP_B
 
@@ -32,40 +32,42 @@ component "Backend" #f1c232 {
   }
 }
 
-component "Data layer" #cc4125 {
+component "Data layer" %lighten("#dd7e6b", 20) {
   port "TCP" as TCP_D
 
   database "Database" as DB
 }
 
 User -> WEB : 1 Uses
-WEB -> FC: 2
+WEB -> FV: 2
+FV -> FC : 3
 
-FC -> FM : 3 Manipulates
-FM -> HTTP_F : 4 Calls API
-HTTP_F -> FM : 15
-FM -down-> FC : 16 Passes data
+FC -> FM : 4 Manipulates
+FM -> HTTP_F : 5 Calls API
 
-FC -> FV : 17 Updates
-FV -> WEB : 18
-WEB -> User : 19 Sees
+HTTP_F -> FM : 16
+FM -down-> FC : 17 Passes data
+
+FC -> FV : 18 Updates
+FV -> WEB : 19
+WEB -> User : 20 Sees
 
 
 HTTP_F <-> HTTP_B : REST API
 
 
-HTTP_B -> AC : 5 Handles request
-AC -> AS : 6 Calls
-AS -> AR : 7 Uses
+HTTP_B -> AC : 6 Handles request
+AC -> AS : 7 Calls
+AS -> AR : 8 Uses
 
-AR -> TCP_B : 8 Requests
+AR -> TCP_B : 9 Requests
 TCP_B <-> TCP_D : Database connection
-TCP_D -> DB : 9 Persists
-DB -> TCP_D : 10 Returns
-TCP_B -> AR : 11
+TCP_D -> DB : 10 Persists
+DB -> TCP_D : 11 Returns
+TCP_B -> AR : 12
 
-AR -down-> AS : 12 Passes data
-AS -up-> AC : 13
-AC -> HTTP_B : 14 Replies
+AR -down-> AS : 13 Passes data
+AS -up-> AC : 14
+AC -> HTTP_B : 15 Replies
 
 @enduml
