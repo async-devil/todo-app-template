@@ -48,4 +48,46 @@ fm -> fc : passes new todos list
 fc -> fv : updates list
 fv -> user: sees updated list
 
+
+== Get todo item by id ==
+
+user -> fv : selects item
+fv -> fc : provides id
+fc -> fm : pipes
+fm -> bc : sends GetTodoById
+
+bc -> bc : validates input data
+
+alt Invalid data
+  bc -> fm : responses with 400
+  fm -> fc : handles error
+  fc -> fv : displays error
+  fv -> user : sees error
+end
+
+bc -> bs : calls
+bs -> br : passes id
+br -> db : sends query
+
+db -> db : processes query
+
+alt Todo not found
+  db -> br : throws or returns nothing
+  br -> bs : throws 404
+  bs -> bc
+  bc -> fm : responses with 404
+  fm -> fc : handles error
+  fc -> fv : displays error
+  fv -> user : sees error
+end
+
+db -> br : requested todo item
+br -> bs : returns
+bs -> bc
+bc -> fm : responses with 200 and TodoItem
+
+fm -> fc : returns
+fc -> fv : displays todo item
+fv -> user : sees todo page
+
 @enduml
