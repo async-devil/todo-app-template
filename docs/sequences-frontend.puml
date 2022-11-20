@@ -1,0 +1,27 @@
+@startuml sequences-frontend
+
+actor "User" as user
+
+box "Frontend" %lighten("#b6d7a8", 20)
+  participant "View" as fv #b6d7a8
+  participant "Controller" as fc #a4c2f4
+  participant "Model" as fm #dd7e6b
+end box
+
+participant "Backend" as b %lighten("#a4c2f4", 20)
+
+== Create todo ==
+
+
+== Get todo by id ==
+
+
+== Get todos by query ==
+
+
+== Update todo by id ==
+
+
+== Delete todo by id ==
+
+@enduml
