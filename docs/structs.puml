@@ -1,0 +1,34 @@
+@startuml structs
+
+entity TodoEntity {
+  id: string | number
+  description: string
+  completed: boolean
+  create_date: number
+}
+
+struct CreateTodoDto {
+  description: string
+  completed = false
+}
+
+struct GetTodoByIdDto {
+  id: string | number
+}
+
+struct GetTodosByQueryDto {
+  completed?: boolean
+  from_date?: number
+  to_date?: number
+}
+
+struct UpdateTodoByIdDto {
+  description?: string
+  completed?: boolean
+}
+
+struct DeleteTodoByIdDto {
+  id: string | number
+}
+
+@enduml
