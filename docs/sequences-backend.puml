@@ -33,7 +33,7 @@ bc -> f : responses with 201 and TodoEntity
 
 == Get todo by id ==
 
-f -> bc : sends GetTodoByIdDto
+f -> bc : sends SelectTodoByIdDto
 
 bc -> bc : validates input data
 
@@ -83,7 +83,7 @@ bc -> f : responses with 200 and TodoEntity array
 
 == Update todo by id ==
 
-f -> bc : sends UpdateTodoByIdDto
+f -> bc : sends UpdateTodoDto and SelectTodoById
 
 bc -> bc : validates input data
 
@@ -112,7 +112,7 @@ bc -> f : responses with 200 and TodoEntity
 
 == Delete todo by id ==
 
-f -> bc : sends DeleteTodoByIdDto
+f -> bc : sends SelectTodoByIdDto
 
 bc -> bc : validates input data
 

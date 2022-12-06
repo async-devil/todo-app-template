@@ -9,26 +9,23 @@ entity TodoEntity {
 
 struct CreateTodoDto {
   description: string
-  completed = false
+  completed?: boolean = false
 }
 
-struct GetTodoByIdDto {
+struct SelectTodoByIdDto {
   id: string | number
 }
 
 struct GetTodosByQueryDto {
   completed?: boolean
+  search?: string
   from_date?: number
   to_date?: number
 }
 
-struct UpdateTodoByIdDto {
+struct UpdateTodoDto {
   description?: string
   completed?: boolean
-}
-
-struct DeleteTodoByIdDto {
-  id: string | number
 }
 
 @enduml
