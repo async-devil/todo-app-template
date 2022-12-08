@@ -1,0 +1,86 @@
+@startuml rest-api
+
+interface Error {
+  statusCode: number
+  error: string
+  message: string
+}
+
+class NotFoundError {
+  statusCode: 404
+  error: "Not Found"
+  message: string
+}
+
+NotFoundError ..|> Error
+
+class BadRequestError {
+  statusCode: 400
+  error: "Bad Request"
+  message: string
+}
+
+BadRequestError ..|> Error
+
+entity TodoEntity {
+  id: string | number
+  description: string
+  completed: boolean
+  create_date: number
+}
+
+struct CreateTodoDto {
+  description: string
+  completed?: boolean = false
+}
+
+struct SelectTodoByIdDto {
+  id: string | number
+}
+
+struct GetTodosByQueryDto {
+  completed?: boolean
+  search?: string
+  from_date?: number
+  to_date?: number
+}
+
+struct UpdateTodoDto {
+  description?: string
+  completed?: boolean
+}
+
+protocol "POST /todos" as PoOT {}
+
+CreateTodoDto --> PoOT : body
+PoOT --> TodoEntity : 201
+PoOT --> BadRequestError
+
+protocol "GET /todos/:id" as GOT {}
+
+SelectTodoByIdDto --> GOT : params
+GOT --> TodoEntity : 200
+GOT --> NotFoundError
+GOT --> BadRequestError
+
+protocol "GET /todos/?" as GMT {}
+
+GetTodosByQueryDto --> GMT : query
+GMT --> TodoEntity : Array, 200
+GMT --> BadRequestError
+
+protocol "PUT /todos/:id" as PuOT {}
+
+SelectTodoByIdDto --> PuOT : params
+UpdateTodoDto --> PuOT : body
+PuOT --> TodoEntity : 200
+PuOT --> NotFoundError
+PuOT --> BadRequestError
+
+protocol "DELETE /todos/:id" as DOT {}
+
+SelectTodoByIdDto --> DOT : params
+note bottom of DOT : 204
+DOT --> BadRequestError
+
+@enduml

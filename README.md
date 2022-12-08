@@ -13,3 +13,7 @@ The goal is to use the best architecture practices, even on small projects like 
 ### Accurate one
 
 ![architecture](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/async-devil/todo-list-app-template/master/docs/architecture.puml)
+
+### REST API Schema
+
+![rest-api](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/async-devil/todo-list-app-template/master/docs/rest-api.puml)
